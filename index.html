@@ -2,28 +2,28 @@
 <html lang="ja">
 <head>
   <meta charset="utf-8">
-  <title>AR.js × A‑Frame 確実動作テンプレート</title>
+  <title>AR.js 最小動作テスト</title>
 
-  <!-- ★ 推奨組み合わせ：A‑Frame 1.0.4 + AR.js 3.4.4 -->
+  <!-- ★ 推奨：A‑Frame 1.0.4 ＋ AR.js 3.4.4 -->
   <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/ar.js@3.4.4/aframe/build/aframe-ar-nft.js"></script>
-  <!-- （ファイル名に “ar-nft” とありますが、image マーカーも使えます） -->
+  <script src="https://cdn.jsdelivr.net/npm/ar.js@3.4.4/aframe/build/aframe-ar.js"></script>
 </head>
 
 <body style="margin:0; overflow:hidden">
 <a-scene
   embedded
-  vr-mode-ui="enabled:false"
-  arjs="sourceType: webcam;             /* 強制 HTTPS */
-        facingMode: user;              /* PC でも必ず取れる */
-        debugUIEnabled: true;">        <!-- 失敗理由を左上に表示 -->
+  vr-mode-ui="enabled: false"
+  arjs="
+    sourceType: webcam;
+    facingMode: user;
+    cameraParametersUrl: https://cdn.jsdelivr.net/npm/ar.js@3.4.4/aframe/examples/marker-training/examples/camera_para.dat;
+    debugUIEnabled: true;"
+>
 
-  <!-- 読み込み待機を長めに -->
-  <a-assets timeout="10000">
-    <a-asset-item id="dummyBox" src=""></a-asset-item>
-  </a-assets>
+  <!-- 読み込み待ち 10 秒 -->
+  <a-assets timeout="10000"></a-assets>
 
-  <!-- ★ まずは Hiro マーカー + 赤い箱でカメラ起動確認 -->
+  <!-- ★ Hiro マーカーでテスト -->
   <a-marker preset="hiro">
     <a-box color="red" depth="0.5" height="0.5" width="0.5"></a-box>
   </a-marker>
